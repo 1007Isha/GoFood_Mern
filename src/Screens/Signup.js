@@ -1,22 +1,33 @@
 import React, { useState } from 'react'
-
-export default function Signup(e) {
+import { Link } from 'react-router-dom';
+export default function Signup() {
  const {credentials,setcredentials}=useState({name:"",email:"",password:"",geolocation:""})
-  const handleSubmit=async()=>{
+//   const handleSubmit=async(e)=>{ 
+//   e.preventDefault();
+//   const response=fetch("https://localhost:5000/api/createuser",{
+//     method:'POST',
+//     header:{
+//       'Content-Type':'application/json'
+//     },
+//     body:JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password,address:credentials.address})
+
+//   })
+const handleSubmit = async (e) => {
   e.preventDefault();
-  const response=fetch("https://localhost:5000/api/createuser",{
-    method:'POST',
-    header:{
-      'Content-Type':'application/json'
+  const response = await fetch("http://localhost:5000/api/auth/createuser", {
+    // credentials: 'include',
+    // Origin:"http://localhost:3000/login",
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
     },
-    body:json.stringify()
+    body: JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password, location: credentials.geolocation })
 
-  })
- 
-
-
+  });
+ }
+const onChange=(event)=>{
+  setcredentials({...credentials,[event.target.name]:event.target.value})
 }
-
 
   return (
     <>
@@ -25,19 +36,24 @@ export default function Signup(e) {
 
           <div className="mb-3">
             <label for="exampleInputEmail1" className="form-label">Name</label>
-            <input type="text" className="form-control" name="name" value={credentials.name} />
+            <input type="text" className="form-control" name="name" value={credentials.name} onChange={onChange}/>
 
           </div>
           <div className="mb-3">
             <label for="exampleInputEmail1" className="form-label">Email address</label>
-            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+            <input type="email" className="form-control" id="exampleInputEmail1" onChange={onChange} name="email" value={credentials.email} aria-describedby="emailHelp" />
             <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
           </div>
           <div className="mb-3">
             <label for="exampleInputPassword1" className="form-label">Password</label>
-            <input type="password" className="form-control" id="exampleInputPassword1" />
+            <input type="password" className="form-control"  onChange={onChange}  name='password' value={credentials.password}/>
           </div>
 
+          <div className="mb-3">
+            <label for="exampleInputEmail1" className="form-label"> Address</label>
+            <input type="text" className="form-control"  onChange={onChange} name="location" value={credentials.address} />
+
+          </div>
           <button type="submit" className="btn btn-primary">Submit</button>
            <link to="/login" className='m-3 btn btn-danger0'>Already a user</link>
         </form>
