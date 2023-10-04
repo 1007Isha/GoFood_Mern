@@ -2,69 +2,61 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 export default function Signup() {
-  
- const {cred,setcredentials}=useState({name:"gfgr",email:"hfhh",password:"tyhht",geolocation:"rhrhr"})
-//   const handleSubmit=async(e)=>{ 
-//   e.preventDefault();
-//   const response=fetch("https://localhost:5000/api/createuser",{
-//     method:'POST',
-//     header:{
-//       'Content-Type':'application/json'
-//     },
-//     body:JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password,address:credentials.address})
 
-//   })
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const response = await fetch("http://localhost:5000/api/createuser", {
+  const[cred, setcredentials ] = useState({ name: "", email: "", password: "", geolocation: "" })
   
-  // credentials: 'include',
-    // Origin:"http://localhost:3000/login",
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    
-    body: JSON.stringify({ name: cred.name, email: cred.email, password: cred.password, location: cred.geolocation })
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:5000/api/createuser", {
 
-  });
-  console.log(response);  
-  console.log("hello");
-  console.log("hello");
-  console.log("hello");
- }
-const onChange=(e)=>{
-  // setcredentials({...credentials,[event.target.name]:event.target.value})
-  setcredentials({ ...cred, [e.target.name]: e.target.value })
-}
+      // credentials: 'include',a
+      // Origin:"http://localhost:3000/login",
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify({ name: cred.name, email: cred.email, password: cred.password, location: cred.geolocation })
+
+    });
+    const json=await response.json();
+    console.log(json);
+    if(!json.success){
+      alert("Enter valid credentials")
+    }
+  }
+  const onChange = (e) => {
+    // setcredentials({...credentials,[event.target.name]:event.target.value})
+    setcredentials({ ...cred, [e.target.name]: e.target.value })
+  }
 
   return (
     <>
       <div className='container'>
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
 
           <div className="mb-3">
-            <label for="exampleInputEmail1" className="form-label">Name</label>
-            <input type="text" className="form-control" name="name" value={cred.name} onChange={onChange}/>
+            <label htmlFor="exampleInputEmail1" className="form-label">Name</label>
+            <input type="text" className="form-control" name="name" value={cred.name} onChange={onChange} />
 
           </div>
           <div className="mb-3">
-            <label for="exampleInputEmail1" className="form-label">Email address</label>
+            <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
             <input type="email" className="form-control" id="exampleInputEmail1" onChange={onChange} name="email" value={cred.email} aria-describedby="emailHelp" />
             <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
           </div>
           <div className="mb-3">
-            <label for="exampleInputPassword1" className="form-label">Password</label>
-            <input type="password" className="form-control"  onChange={onChange}  name='password' value={cred.password}/>
+            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+            <input type="password" className="form-control" onChange={onChange} name='password' value={cred.password} />
           </div>
 
           <div className="mb-3">
-            <label for="exampleInputEmail1" className="form-label"> Address</label>
-            <input type="text" className="form-control"  onChange={onChange} name="address" value={cred.geolocation} />
+            <label htmlFor="exampleInputEmail1" className="form-label"> Address</label>
+            <input type="text" className="form-control" onChange={onChange} name="geolocation" value={cred.geolocation} />
 
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
-           <link to="/login" className='m-3 btn btn-danger0'>Already a user</link>
+          <Link to="/login" className='m-3 btn btn-danger0'>Already a user</Link>
         </form>
 
       </div>
