@@ -1,26 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const user = require('../models/user');
+const user = require('../models/User');
 const { body, validationResult } = require('express-validator');
+const bcrypt=require('bcryptjs');
+const jwt=require('jsonwebtoken');
+const jwtSecret="mynameisishacsestudent"
 router.post("/createuser", [
     body('email').isEmail(),
     body('password', "Incorrect password").isLength({ min: 5 }),
     body('name').isLength({ min: 5 })]
     , async (req, res) => {
-        console.log(req.body.name,
-            req.body.email,
-            req.body.password,
-            req.body.location
-        )
+       
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-       
+       const salt= await bcrypt.genSalt(10);
+       let secPassword=await bcrypt.hash(req.body.password,salt)
         try {
             await user.create({
                 name: req.body.name,
-                password: req.body.password,
+                password: secPassword,
                 email: req.body.email,
                 location: req.body.location
             })
@@ -35,6 +35,7 @@ router.post("/loginuser", [
     body('email').isEmail(),
     body('password', "Incorrect password").isLength({ min: 5 })]
     , async (req, res) => {
+       
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
@@ -42,14 +43,21 @@ router.post("/loginuser", [
         let email = req.body.email;
 
         try {
-            let userdata = await user.findOne(email);
-            if (!userdata) {
+            let userData = await user.findOne({email});
+            if (!userData) {
                 return res.status(400).json({ errors: "Try Logging with correct credentials" });
             }
-            if (!req.body.password === userdata.password) {
+            const pwdCompare=await bcrypt.compare(req.body.password,userData.password)
+            if (!pwdCompare) {
                 return res.status(400).json({ errors: "Try Logging with correct credentials" });
             }
-            return res.json({ success: true });
+            const data={
+                user:{
+                    id:userData.id
+                }
+            }
+            const authtoken=jwt.sign(data,jwtSecret)
+            return res.json({ success: true ,authtoken:authtoken});
         }
         catch (error) {
             console.log(error);
