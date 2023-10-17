@@ -20,6 +20,7 @@ export default function Login() {
     console.log(json);
     if (json.success) {
       localStorage.setItem("authToken",json.authToken);
+      localStorage.setItem("userEmail",cred.email);
       console.log(localStorage.getItem("authToken"));
       navigate("/");
     }
@@ -33,7 +34,8 @@ export default function Login() {
     setcredentials({ ...cred, [e.target.name]: e.target.value })
   }
   return (
-    <div className='container'>
+    <div style={{background:"TEAL" ,width:"100vw",height:"100vh"}}>
+       <div className='container'  style={{background:"rgbA(255, 219, 88,1)", border:'4px dotted white' ,borderTop:"0px", backgroundSize:"cover", width:"70vw",height:"70vh"}}>
       <form onSubmit={handleSubmit}>
 
         <div className="mb-3">
@@ -50,5 +52,7 @@ export default function Login() {
       </form>
 
     </div>
+    </div>
+   
   )
 }

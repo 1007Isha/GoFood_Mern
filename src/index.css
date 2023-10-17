@@ -17,3 +17,6 @@ code {
   
 }
 
+.carousalImg{
+  object-fit: contain !important;
+}

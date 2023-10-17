@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import  Badge  from 'react-bootstrap/Badge';
+// import { Modal } from 'bootstrap';
+import Modal from '../Modal'
+import {useCart} from './ContextReducer';
+import Cart from '../Screens/Cart'
+// import {M}
+
+
 export default function Navbar() {
+  const[cartview,setcartview]=useState(false);
+  let data = useCart();
 const navigate=useNavigate();
 const handleLogout =()=>{
   localStorage.removeItem("authToken");
@@ -23,7 +32,7 @@ const handleLogout =()=>{
               </li>
               {(localStorage.getItem("authToken")) ?
                 <li className="nav-item">
-                  <Link className="nav-link active fs-5" aria-current="page" to="/">My Orders</Link>
+                  <Link className="nav-link active fs-5" aria-current="page" to="/myorder">My Orders</Link>
                 </li>
                 : ""}
             </ul>
@@ -38,12 +47,13 @@ const handleLogout =()=>{
               </div>
               :
               <div>
-                <div className="btn bg-white text-success mx-1">
+                <div className="btn bg-white text-success mx-1" onClick={()=>{setcartview(true)}}>
                   My Cart
                   {" "}
-                  <Badge pill bg="danger">2</Badge>
+                  <Badge pill bg="danger">{data.length}</Badge>
                 </div>
-                <div className="btn bg-white text-danger mx-1" onClick={handleLogout}>
+                {cartview ? <Modal onClose={()=>{setcartview(false)}}><Cart/></Modal>:""}
+                <div className="btn bg-white text-danger mx-1"  onClick={handleLogout}>
                   Logout
                 </div>
               </div>

@@ -32,7 +32,8 @@ export default function Signup() {
 
   return (
     <>
-      <div className='container'>
+    <div style={{background:"TEAL" ,width:"100vw",height:"100vh"}}>
+    <div className='container' style={{background:"rgbA(255, 219, 88,1)", border:'4px dotted white' ,borderTop:"0px", backgroundSize:"cover", width:"70vw",height:"70vh"}}>
         <form onSubmit={handleSubmit}>
 
           <div className="mb-3">
@@ -60,6 +61,8 @@ export default function Signup() {
         </form>
 
       </div>
+    </div>
+      
 
     </>
   )
