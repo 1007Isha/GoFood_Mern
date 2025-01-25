@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const mongoURI = "mongodb://gofood:mern123@ac-bjxvb6c-shard-00-00.zpvibgo.mongodb.net:27017,ac-bjxvb6c-shard-00-01.zpvibgo.mongodb.net:27017,ac-bjxvb6c-shard-00-02.zpvibgo.mongodb.net:27017/gofoodmern?ssl=true&replicaSet=atlas-2c013d-shard-0&authSource=admin&retryWrites=true&w=majority&appName=AtlasApp"
+// const mongoURI = "mongodb://gofood:mern1234@ac-bjxvb6c-shard-00-00.zpvibgo.mongodb.net:27017,ac-bjxvb6c-shard-00-01.zpvibgo.mongodb.net:27017,ac-bjxvb6c-shard-00-02.zpvibgo.mongodb.net:27017/gofoodmern?ssl=true&replicaSet=atlas-2c013d-shard-0&authSource=admin&retryWrites=true&w=majority&appName=AtlasApp"
+const mongoURI = "mongodb://gofood:mern1234@ac-bjxvb6c-shard-00-00.zpvibgo.mongodb.net:27017,ac-bjxvb6c-shard-00-01.zpvibgo.mongodb.net:27017,ac-bjxvb6c-shard-00-02.zpvibgo.mongodb.net:27017/gofoodmern?ssl=true&replicaSet=atlas-2c013d-shard-0&authSource=admin&retryWrites=true&w=majority&appName=AtlasApp"
 const mongoDB = async () => {
 
     await mongoose.connect(mongoURI, { useNewUrlParser: true }, (err, result) => {
