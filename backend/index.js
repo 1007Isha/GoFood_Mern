@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 //   res.send('Hello World!')
 // })
 app.use(express.json());
-app.use('/api/',require("./Routes/CreateUser"));
+app.use('/api/',require("./Routes/createuser"));
 app.use('/api/',require("./Routes/DisplayData"));
 app.use('/api/',require("./Routes/OrderData"));
 app.use(cors())
