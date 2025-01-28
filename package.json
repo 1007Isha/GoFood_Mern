@@ -17,15 +17,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-  "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
-  "start-frontend": "react-scripts start",
-  "start-backend": "nodemon backend/index.js",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject",
-  "deploy": "npm run build && npm run deploy-backend",
-  "deploy-backend": "echo 'Backend deployment command here'"
-},
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -43,9 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.2",
-    "nodemon": "^3.1.9"
   }
 }
