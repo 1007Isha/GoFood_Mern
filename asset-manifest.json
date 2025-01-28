@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/GoFood_Mern/static/css/main.26cd0d11.css",
+    "main.js": "/GoFood_Mern/static/js/main.d9ec7ef3.js",
+    "static/js/787.28cb0dcd.chunk.js": "/GoFood_Mern/static/js/787.28cb0dcd.chunk.js",
+    "static/media/trash.svg": "/GoFood_Mern/static/media/trash.f2e646d75790a179c323aba2d1d008a8.svg",
+    "index.html": "/GoFood_Mern/index.html",
+    "main.26cd0d11.css.map": "/GoFood_Mern/static/css/main.26cd0d11.css.map",
+    "main.d9ec7ef3.js.map": "/GoFood_Mern/static/js/main.d9ec7ef3.js.map",
+    "787.28cb0dcd.chunk.js.map": "/GoFood_Mern/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.26cd0d11.css",
+    "static/js/main.d9ec7ef3.js"
+  ]
+}
