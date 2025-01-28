@@ -28,6 +28,14 @@ app.use('/api/',require("./Routes/createuser"));
 app.use('/api/',require("./Routes/DisplayData"));
 app.use('/api/',require("./Routes/OrderData"));
 
+app.use(
+  cors({
+    origin: 'https://go-food-mern-ruddy.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+  })
+);
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
